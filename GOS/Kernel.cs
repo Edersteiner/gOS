@@ -40,8 +40,6 @@ namespace GOS
 
         protected override void Run()
         {
-            if (applicationMode == false)
-            {
                 inputText();
                 var input = Console.ReadLine();
                 string cmd = input.Split(" ")[0];
@@ -54,8 +52,8 @@ namespace GOS
                     case "reboot":
                         Sys.Power.Reboot();
                         break;
-
-                    case "dir":
+                    
+                    case "ls":
                         string[] dirDirectories = Directory.GetDirectories(Directory.GetCurrentDirectory());
                         foreach (var dir in dirDirectories)
                         {
@@ -131,7 +129,7 @@ namespace GOS
                         Directory.CreateDirectory(dirPath);
                         break;
 
-                    case "del":
+                    case "rm":
                         var delTarget = input.Remove(0, input.IndexOf(' ') + 1);
                         if (File.Exists(delTarget))
                         {
@@ -170,10 +168,10 @@ namespace GOS
 
                     case "theme":
                         var targetTheme = input.Remove(0, input.IndexOf(' ') + 1);
-                        string[] theme_names = { "Ice (Default)", "Plain", "Inferno", "Sahara", "Magic" };
+                        string[] theme_names = { "Ice (Default)", "Plain", "Inferno", "Sahara", "Magic", "Indian Hacker" };
                         Int32.TryParse(targetTheme, out currentTheme);
 
-                        if ((currentTheme < 1) || (currentTheme > 5))
+                        if ((currentTheme < 1) || (currentTheme > 6))
                         {
                             currentTheme = 1;
                             error(targetTheme + " is not recognized as a theme");
@@ -191,7 +189,6 @@ namespace GOS
                             error(cmd + " is not recognized as a command");
                         break;
                 }
-            }
          
         }
 
@@ -216,7 +213,7 @@ namespace GOS
             ConsoleColor[] theme_set3 = new ConsoleColor[4] { ConsoleColor.Yellow, ConsoleColor.Red, ConsoleColor.DarkRed, ConsoleColor.Red };
             ConsoleColor[] theme_set4 = new ConsoleColor[4] { ConsoleColor.DarkGreen, ConsoleColor.DarkYellow, ConsoleColor.Yellow, ConsoleColor.Green };
             ConsoleColor[] theme_set5 = new ConsoleColor[4] { ConsoleColor.Magenta, ConsoleColor.DarkCyan, ConsoleColor.DarkMagenta, ConsoleColor.Red };
-            ConsoleColor[] theme_set6 = new ConsoleColor[4] { ConsoleColor.Green, ConsoleColor.Green, ConsoleColor.Green, ConsoleColor.Green };
+            ConsoleColor[] theme_set6 = new ConsoleColor[4] { ConsoleColor.Green, ConsoleColor.Green, ConsoleColor.Green, ConsoleColor.DarkGreen };
             ConsoleColor[][] all_theme_sets = new ConsoleColor[][] { theme_set1, theme_set2, theme_set3, theme_set4, theme_set5, theme_set6 };
 
             themeColor1 = all_theme_sets[theme][0];
@@ -244,11 +241,6 @@ namespace GOS
             string[] arrLine = File.ReadAllLines(fileName);
             arrLine[line_to_edit - 1] = newText;
             File.WriteAllLines(fileName, arrLine);
-        }
-
-        public void ApplicationMode(bool trueorfalse)
-        {
-            applicationMode = trueorfalse;
         }
     }
 }
