@@ -1,0 +1,10 @@
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.deps.json
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.dll
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.pdb
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.csprojAssemblyReference.cache
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.AssemblyInfoInputs.cache
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.AssemblyInfo.cs
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.dll
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.pdb
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\bin\Debug\netcoreapp2.0\cosmos\ConsoleDraw.dll
+C:\Users\gabri\OneDrive\GOS\GOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.csproj.CopyComplete
