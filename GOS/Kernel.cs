@@ -1,6 +1,7 @@
 ﻿using System;
 using Sys = Cosmos.System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace GOS
 {
@@ -17,7 +18,7 @@ namespace GOS
         {
             var fs = new Sys.FileSystem.CosmosVFS();
             Sys.FileSystem.VFS.VFSManager.RegisterVFS(fs);
-            
+
             if (!File.Exists("0:\\settings.ini"))
             {
                 File.Create("0:\\settings.ini");
@@ -28,30 +29,12 @@ namespace GOS
                 }
             }
             string[] settings = File.ReadAllLines("0:\\settings.ini");
-            if (settings[0] == "theme = 1")
-            {
-                currentTheme = 1;
-            }
-            if (settings[0] == "theme = 2")
-            {
-                currentTheme = 2;
-            }
-            if (settings[0] == "theme = 3")
-            {
-                currentTheme = 3;
-            }
-            if (settings[0] == "theme = 4")
-            {
-                currentTheme = 4;
-            }
-            if (settings[0] == "theme = 5")
-            {
-                currentTheme = 5;
-            }
-            if (settings[0] == "theme = 6")
-            {
-                currentTheme = 6;
-            }
+
+            string theme_settings = settings[0];
+            var theme = theme_settings.Substring(theme_settings.Length - 1);
+            Int32.TryParse(theme, out int x);
+            currentTheme = x;
+
             OSinit();
         }
 
@@ -67,9 +50,11 @@ namespace GOS
                     case "shutdown":
                         Sys.Power.Shutdown();
                         break;
+
                     case "reboot":
                         Sys.Power.Reboot();
                         break;
+
                     case "dir":
                         string[] dirDirectories = Directory.GetDirectories(Directory.GetCurrentDirectory());
                         foreach (var dir in dirDirectories)
@@ -82,6 +67,7 @@ namespace GOS
                             Console.WriteLine(file + " | File");
                         }
                         break;
+
                     case "cd":
                         var targetDir = input.Remove(0, input.IndexOf(' ') + 1);
                         if (Directory.Exists(targetDir))
@@ -89,6 +75,7 @@ namespace GOS
                             Directory.SetCurrentDirectory(targetDir);
                         }
                         break;
+
                     case "beep":
                         var targetFreqRaw = input.Remove(0, input.IndexOf(' ') + 1);
                         int targetFreq = int.Parse(targetFreqRaw);
@@ -101,8 +88,14 @@ namespace GOS
                             Console.Beep(targetFreq, 1000);
                         }
                         break;
+
                     case "cat":
                         var targetCat = input.Remove(0, input.IndexOf(' ') + 1);
+                        if (!File.Exists(targetCat))
+                        {
+                            Console.WriteLine("Could not find file");
+                            break;
+                        }
                         string[] lines = File.ReadAllLines(targetCat);
 
                         foreach (string line in lines)
@@ -110,10 +103,34 @@ namespace GOS
                             Console.WriteLine(line);
                         }
                         break;
+
+                    case "grep":
+                        List<string> flags = new List<string>();
+                        foreach (string x in input.Split(" "))
+                        {
+                            flags.Add(x);
+                        }
+                        if (flags.Count > 1)
+                            if (flags[1] == "-h")
+                            {
+                                Console.WriteLine("GOS implementation of grep\nUsage: grep PATTERN FILENAME\n\nOptional switches:\n    -c Count each PATTERN instance\n    -w force PATTERN to match only whole words");
+                                break;
+                            }
+                        
+                        if (flags.Count < 3)
+                        {
+                            Console.WriteLine("Too few arguments, excpected at least 2");
+                            break;
+                        }
+                        Grep gp = new Grep();
+                        gp.grep(flags[2], flags[1], flags);
+                        break;
+
                     case "mkdir":
                         var dirPath = input.Remove(0, input.IndexOf(' ') + 1);
                         Directory.CreateDirectory(dirPath);
                         break;
+
                     case "del":
                         var delTarget = input.Remove(0, input.IndexOf(' ') + 1);
                         if (File.Exists(delTarget))
@@ -129,16 +146,20 @@ namespace GOS
                             error("File or Directory does not exist / isn't valid");
                         }
                         break;
+
                     case "clear":
                         Console.Clear();
                         break;
+
                     case "reinit":
                         OSinit();
                         break;
+
                     case "echo":
                         var echoMsg = input.Remove(0, input.IndexOf(' ') + 1);
                         Console.WriteLine(echoMsg);
                         break;
+
                     case "run":
                         var targetApplication = input.Remove(0, input.IndexOf(' ') + 1);
                         switch(targetApplication)
@@ -146,54 +167,28 @@ namespace GOS
                            
                         }
                         break;
+
                     case "theme":
                         var targetTheme = input.Remove(0, input.IndexOf(' ') + 1);
-                        switch (targetTheme)
+                        string[] theme_names = { "Ice (Default)", "Plain", "Inferno", "Sahara", "Magic" };
+                        Int32.TryParse(targetTheme, out currentTheme);
+
+                        if ((currentTheme < 1) || (currentTheme > 5))
                         {
-                            case "1":
-                                currentTheme = 1;
-                                lineChanger("theme = " + currentTheme, "0:\\settings.ini", 1);
-                                Console.WriteLine("Switching to Ice(Default) theme");
-                                break;
-                            case "2":
-                                currentTheme = 2;
-                                lineChanger("theme = " + currentTheme, "0:\\settings.ini", 1);
-                                Console.WriteLine("Switching to Plain theme");
-                                break;
-                            case "3":
-                                currentTheme = 3;
-                                lineChanger("theme = " + currentTheme, "0:\\settings.ini", 1);
-                                Console.WriteLine("Switching to Inferno theme");
-                                break;
-                            case "4":
-                                currentTheme = 4;
-                                lineChanger("theme = " + currentTheme, "0:\\settings.ini", 1);
-                                Console.WriteLine("Switching to Sahara theme");
-                                break;
-                            case "5":
-                                currentTheme = 5;
-                                lineChanger("theme = " + currentTheme, "0:\\settings.ini", 1);
-                                Console.WriteLine("Switching to Magic theme");
-                                break;
-                            case "6":
-                                currentTheme = 6;
-                                lineChanger("theme = " + currentTheme, "0:\\settings.ini", 1);
-                                Console.WriteLine("Switching to Indian Hacker theme");
-                                break;
-                            default:
-                                error(targetTheme + " is not recognized as a theme");
-                                break;
-                        }
-                        break;
-                    default:
-                        if (input == "" || input == " ")
-                        {
+                            currentTheme = 1;
+                            error(targetTheme + " is not recognized as a theme");
                             break;
                         }
+
+                        lineChanger("theme = " + currentTheme, "0:\\settings.ini", 1);
+                        Console.WriteLine("Switching to " + theme_names[currentTheme-1] + " theme");
+                        break;
+
+                    default:
+                        if (string.IsNullOrWhiteSpace(input))
+                            break;
                         else
-                        {
                             error(cmd + " is not recognized as a command");
-                        }
                         break;
                 }
             }
@@ -213,49 +208,26 @@ namespace GOS
             Console.WriteLine(msg);
             Console.ResetColor();
         }
+        protected void ColorSettings(int theme)
+        {
+            theme = theme - 1;
+            ConsoleColor[] theme_set1 = new ConsoleColor[4] { ConsoleColor.Cyan, ConsoleColor.Blue, ConsoleColor.DarkBlue, ConsoleColor.Blue };
+            ConsoleColor[] theme_set2 = new ConsoleColor[4] { ConsoleColor.White, ConsoleColor.White, ConsoleColor.White, ConsoleColor.White };
+            ConsoleColor[] theme_set3 = new ConsoleColor[4] { ConsoleColor.Yellow, ConsoleColor.Red, ConsoleColor.DarkRed, ConsoleColor.Red };
+            ConsoleColor[] theme_set4 = new ConsoleColor[4] { ConsoleColor.DarkGreen, ConsoleColor.DarkYellow, ConsoleColor.Yellow, ConsoleColor.Green };
+            ConsoleColor[] theme_set5 = new ConsoleColor[4] { ConsoleColor.Magenta, ConsoleColor.DarkCyan, ConsoleColor.DarkMagenta, ConsoleColor.Red };
+            ConsoleColor[][] all_theme_sets = new ConsoleColor[][] { theme_set1, theme_set2, theme_set3, theme_set4, theme_set5 };
+
+            themeColor1 = all_theme_sets[theme][0];
+            themeColor2 = all_theme_sets[theme][1];
+            themeColor3 = all_theme_sets[theme][2];
+            themeColor4 = all_theme_sets[theme][3];
+        }
 
         protected void OSinit()
         {
-            switch (currentTheme)
-            {
-                case 1:
-                    themeColor1 = ConsoleColor.Cyan;
-                    themeColor2 = ConsoleColor.Blue;
-                    themeColor3 = ConsoleColor.DarkBlue;
-                    themeColor4 = ConsoleColor.Blue;
-                    break;
-                case 2:
-                    themeColor1 = ConsoleColor.White;
-                    themeColor2 = ConsoleColor.White;
-                    themeColor3 = ConsoleColor.White;
-                    themeColor4 = ConsoleColor.White;
-                    break;
-                case 3:
-                    themeColor1 = ConsoleColor.Yellow;
-                    themeColor2 = ConsoleColor.Red;
-                    themeColor3 = ConsoleColor.DarkRed;
-                    themeColor4 = ConsoleColor.Red;
-                    break;
-                case 4:
-                    themeColor1 = ConsoleColor.DarkGreen;
-                    themeColor2 = ConsoleColor.DarkYellow;
-                    themeColor3 = ConsoleColor.Yellow;
-                    themeColor4 = ConsoleColor.Green;
-                    break;
-                case 5:
-                    themeColor1 = ConsoleColor.Magenta;
-                    themeColor2 = ConsoleColor.DarkCyan;
-                    themeColor3 = ConsoleColor.DarkMagenta;
-                    themeColor4 = ConsoleColor.Red;
-                    break;
-                case 6:
-                    themeColor1 = ConsoleColor.Green;
-                    themeColor2 = ConsoleColor.Green;
-                    themeColor3 = ConsoleColor.Green;
-                    themeColor4 = ConsoleColor.Green;
-                    break;
-            }           
             Console.Clear();
+            ColorSettings(currentTheme);
             Console.ForegroundColor = themeColor1;
             Console.WriteLine("  ____  ___  ____  ");
             Console.WriteLine(" / ___|/ _ \\/ ___| ");
