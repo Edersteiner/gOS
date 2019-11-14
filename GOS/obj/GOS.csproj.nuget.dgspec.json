@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\GOS\\GOS\\GOS.csproj": {}
+    "C:\\GOS_GitHub\\GOS\\GOS.csproj": {}
   },
   "projects": {
-    "D:\\GOS\\GOS\\GOS.csproj": {
+    "C:\\GOS_GitHub\\GOS\\GOS.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\GOS\\GOS\\GOS.csproj",
+        "projectUniqueName": "C:\\GOS_GitHub\\GOS\\GOS.csproj",
         "projectName": "GOS",
-        "projectPath": "D:\\GOS\\GOS\\GOS.csproj",
+        "projectPath": "C:\\GOS_GitHub\\GOS\\GOS.csproj",
         "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-        "outputPath": "D:\\GOS\\GOS\\obj\\",
+        "outputPath": "C:\\GOS_GitHub\\GOS\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",

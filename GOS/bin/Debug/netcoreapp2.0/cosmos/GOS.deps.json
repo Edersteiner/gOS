@@ -12,8 +12,7 @@
           "Cosmos.Build": "0.1.0-localbuild20190628100707",
           "Cosmos.Debug.Kernel": "0.1.0-localbuild20190628100707",
           "Cosmos.System2": "0.1.0-localbuild20190628100707",
-          "Microsoft.NETCore.App": "2.0.9",
-          "ConsoleDraw": "1.0.0.0"
+          "Microsoft.NETCore.App": "2.0.9"
         },
         "runtime": {
           "GOS.dll": {}
@@ -928,14 +927,6 @@
             "fileVersion": "2.0.26615.1"
           }
         }
-      },
-      "ConsoleDraw/1.0.0.0": {
-        "runtime": {
-          "ConsoleDraw.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
-        }
       }
     }
   },
@@ -1063,11 +1054,6 @@
       "sha512": "sha512-jLVMYF1GOsJDsUIfRPF3TZTo9OsZAmCb/V1rQZKyNDyfOtzWIu1vSwfffuyE4hqFt9MqZBLHMdF4IfySFNk+ug==",
       "path": "runtime.win-x86.microsoft.netcore.dotnethostresolver/2.0.9",
       "hashPath": "runtime.win-x86.microsoft.netcore.dotnethostresolver.2.0.9.nupkg.sha512"
-    },
-    "ConsoleDraw/1.0.0.0": {
-      "type": "reference",
-      "serviceable": false,
-      "sha512": ""
     }
   }
 }

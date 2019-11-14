@@ -18,3 +18,11 @@ C:\Users\Lenovo\Desktop\gOS\gos\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.dll
 C:\Users\Lenovo\Desktop\gOS\gos\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.pdb
 C:\Users\Lenovo\Desktop\gOS\gos\GOS\bin\Debug\netcoreapp2.0\cosmos\ConsoleDraw.dll
 C:\Users\Lenovo\Desktop\gOS\gos\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.csproj.CopyComplete
+C:\GOS_GitHub\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.deps.json
+C:\GOS_GitHub\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.dll
+C:\GOS_GitHub\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.pdb
+C:\GOS_GitHub\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.csprojAssemblyReference.cache
+C:\GOS_GitHub\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.AssemblyInfoInputs.cache
+C:\GOS_GitHub\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.AssemblyInfo.cs
+C:\GOS_GitHub\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.dll
+C:\GOS_GitHub\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.pdb

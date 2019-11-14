@@ -115,10 +115,4 @@
         <PackageReference Include="Cosmos.System2" Version="0-*" NoWarn="NU1604" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Reference Include="ConsoleDraw">
-        <HintPath>..\ConsoleDraw.dll</HintPath>
-      </Reference>
-    </ItemGroup>
-
 </Project>
