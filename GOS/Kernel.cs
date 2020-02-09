@@ -72,29 +72,7 @@ namespace GOS
                         if (!input.EndsWith(" "))
                         {
                             var targetDir = input.Split(" ")[1];
-                            if (Directory.Exists(targetDir))
-                            {
-                                if (!targetDir.Contains("0:\\"))
-                                {
-                                    if (!Directory.GetCurrentDirectory().EndsWith("\\"))
-                                    {
-                                        Directory.SetCurrentDirectory(Directory.GetCurrentDirectory() + "\\" + targetDir);
-                                    }
-                                    else
-                                    {
-                                        Directory.SetCurrentDirectory(Directory.GetCurrentDirectory() + targetDir);
-                                    }
-                                }
-                                else
-                                {
-                                    Directory.SetCurrentDirectory(targetDir);
-                                }
-
-                            }
-                            else
-                            {
-                                error(targetDir + " Isn't recognized as a directory");
-                            }
+                            cd.changedir(targetDir);
                         }
                         else
                         {
@@ -158,6 +136,22 @@ namespace GOS
                     break;
 
                 case "mkdir":
+                    if (input.Contains(" "))
+                    {
+                        if (input.EndsWith(" "))
+                        {
+                            error("no path specified");
+                        }
+                        else
+                        {
+                            var mkdirPath = input.Split(" ")[1];
+                            FScreate.makeDir(mkdirPath);
+                        }
+                    }
+                    else
+                    {
+                        error("no path specified");
+                    }
                     var dirPath = input.Remove(0, input.IndexOf(' ') + 1);
                     Directory.CreateDirectory(dirPath);
                     break;
@@ -195,54 +189,7 @@ namespace GOS
                         else
                         {
                             var rmPath = input.Split(" ")[1];
-                            if (rmPath.Contains(":\\"))
-                            {
-                                if (Directory.Exists(rmPath))
-                                {
-                                    Directory.Delete(rmPath);
-                                }
-                                else if (File.Exists(rmPath))
-                                {
-                                    File.Delete(rmPath);
-                                }
-                                else
-                                {
-                                    error(rmPath + " doesn't exist");
-                                }
-                            }
-                            else
-                            {
-                                if (Directory.GetCurrentDirectory().EndsWith("\\"))
-                                {
-                                    if (Directory.Exists(Directory.GetCurrentDirectory() + rmPath))
-                                    {
-                                        Directory.Delete(Directory.GetCurrentDirectory() + rmPath);
-                                    }
-                                    else if (File.Exists(rmPath))
-                                    {
-                                        File.Delete(Directory.GetCurrentDirectory() + rmPath);
-                                    }
-                                    else
-                                    {
-                                        error(rmPath + " doesn't exist");
-                                    }
-                                }
-                                else
-                                {
-                                    if (Directory.Exists(Directory.GetCurrentDirectory() + "\\" + rmPath))
-                                    {
-                                        Directory.Delete(Directory.GetCurrentDirectory() + "\\" + rmPath);
-                                    }
-                                    else if (File.Exists(rmPath))
-                                    {
-                                        File.Delete(Directory.GetCurrentDirectory() + "\\" + rmPath);
-                                    }
-                                    else
-                                    {
-                                        error(rmPath + " doesn't exist");
-                                    }
-                                }
-                            }
+                            rm.remove(rmPath);
                         }
                     }
                     else
@@ -286,15 +233,15 @@ namespace GOS
                             switch (helpPage)
                             {
                                 case "1":
-                                    Console.WriteLine("Power Commands:\nshutdown: Turns the OS and computer off.\nreboot: Reboots the computer.\nConsole Commands:\nreinit: Reinitializes the OS (pseudo-reboot).\nclear: Clears the console.\necho (message): Prints the specified message to the console.\ntheme (themeID): Changes the theme of the console.");
+                                    Console.WriteLine("Power Commands\n--------------\nshutdown: Turns the OS and computer off.\n\nreboot: Reboots the computer.\n\nConsole Commands\n----------------\nreinit: Reinitializes the OS (pseudo-reboot).\n\nclear: Clears the console.\n\necho (message): Prints the specified message to the console.\n\ntheme (themeID): Changes the theme of the console.");
                                     break;
 
                                 case "2":
-                                    Console.WriteLine("Filesystem Commands:\nls: Shows all subdirectories and files within current directory.\ncd (path): Changes current directory to specified path.\nrm (path): Removes specified directory or file.\nmkdir (path): Creates new directory in specified path.\ntouch (path): Creates new file in specified path.\ncat (path): Prints all the lines of specified file.\ngrep (pattern) (path): type grep -h for more information.");
+                                    Console.WriteLine("Filesystem Commands\n-------------------\nls: Shows all subdirectories and files within current directory.\n\ncd (path): Changes current directory to specified path.\n\nrm (path): Removes specified directory or file.\n\nmkdir (path): Creates new directory in specified path.\n\ntouch (path): Creates new file in specified path.\n\ncat (path): Prints all the lines of specified file.\n\ngrep (pattern) (path): type grep -h for more information.");
                                     break;
 
                                 case "3":
-                                    Console.WriteLine("WIP filesystem commands:\nwrite (path) (text): Writes to specified text to specified file.\nwriteline (path) (text): Creates new line and writes specified text to a file.\nOther Commands:\nbeep (frequency): Plays a sound with the specified frequency throught the pc speakers");
+                                    Console.WriteLine("WIP filesystem commands\n-----------------------\nwrite (path) (text): Writes to specified text to specified file.\n\nwriteline (path) (text): Creates new line and writes specified text to a file.\n\nOther Commands\n--------------\nbeep (frequency): Plays a sound with the specified frequency.");
                                     break;
 
                                 default:
@@ -341,7 +288,7 @@ namespace GOS
             Console.ResetColor();
         }
 
-        protected void error(string msg)
+        public static void error(string msg)
         {
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(msg);
