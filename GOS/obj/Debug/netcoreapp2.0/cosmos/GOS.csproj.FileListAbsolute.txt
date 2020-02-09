@@ -26,3 +26,11 @@ C:\GOS_GitHub\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.AssemblyInfoInputs.cache
 C:\GOS_GitHub\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.AssemblyInfo.cs
 C:\GOS_GitHub\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.dll
 C:\GOS_GitHub\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.pdb
+D:\gOS\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.deps.json
+D:\gOS\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.dll
+D:\gOS\GOS\bin\Debug\netcoreapp2.0\cosmos\GOS.pdb
+D:\gOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.csprojAssemblyReference.cache
+D:\gOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.AssemblyInfoInputs.cache
+D:\gOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.AssemblyInfo.cs
+D:\gOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.dll
+D:\gOS\GOS\obj\Debug\netcoreapp2.0\cosmos\GOS.pdb
