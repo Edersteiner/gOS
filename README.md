@@ -33,7 +33,7 @@ cat (path): Prints all the lines of specified file.
 grep (pattern) (path): Prints lines of text specifed file which match the specified pattern. use flag -h in gOS for more info.
 
 #### WIP filesystem commands
-(These commands are not finished and are not reliable to use)
+##### These commands are not finished and are not reliable to use
 
 write (path) (text): Writes to specified text to specified file.
 
