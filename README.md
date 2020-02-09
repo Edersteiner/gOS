@@ -41,3 +41,5 @@ writeline (path) (text): Creates new line and writes specified text to specified
 
 ### Other Commands
 beep (frequency): Plays a sound with the specified frequency throught the pc speakers
+
+info: Shows system and OS information.
