@@ -244,7 +244,6 @@ namespace GOS
                         error(cmd + " is not recognized as a command");
                     break;
             }
-
         }
 
         protected void inputText()
