@@ -12,6 +12,7 @@ namespace GOS
         ConsoleColor themeColor3;
         ConsoleColor themeColor4;
         int currentTheme;
+        string version = "dev1.0";
 
         protected override void BeforeRun()
         {
@@ -185,18 +186,68 @@ namespace GOS
                     break;
 
                 case "rm":
-                    var delTarget = input.Remove(0, input.IndexOf(' ') + 1);
-                    if (File.Exists(delTarget))
+                    if (input.Contains(" "))
                     {
-                        File.Delete(delTarget);
-                    }
-                    else if (Directory.Exists(delTarget))
-                    {
-                        Directory.Delete(delTarget);
+                        if(input.EndsWith(" "))
+                        {
+                            error("no path specified");
+                        }
+                        else
+                        {
+                            var rmPath = input.Split(" ")[1];
+                            if (rmPath.Contains(":\\"))
+                            {
+                                if (Directory.Exists(rmPath))
+                                {
+                                    Directory.Delete(rmPath);
+                                }
+                                else if (File.Exists(rmPath))
+                                {
+                                    File.Delete(rmPath);
+                                }
+                                else
+                                {
+                                    error(rmPath + " doesn't exist");
+                                }
+                            }
+                            else
+                            {
+                                if (Directory.GetCurrentDirectory().EndsWith("\\"))
+                                {
+                                    if (Directory.Exists(Directory.GetCurrentDirectory() + rmPath))
+                                    {
+                                        Directory.Delete(Directory.GetCurrentDirectory() + rmPath);
+                                    }
+                                    else if (File.Exists(rmPath))
+                                    {
+                                        File.Delete(Directory.GetCurrentDirectory() + rmPath);
+                                    }
+                                    else
+                                    {
+                                        error(rmPath + " doesn't exist");
+                                    }
+                                }
+                                else
+                                {
+                                    if (Directory.Exists(Directory.GetCurrentDirectory() + "\\" + rmPath))
+                                    {
+                                        Directory.Delete(Directory.GetCurrentDirectory() + "\\" + rmPath);
+                                    }
+                                    else if (File.Exists(rmPath))
+                                    {
+                                        File.Delete(Directory.GetCurrentDirectory() + "\\" + rmPath);
+                                    }
+                                    else
+                                    {
+                                        error(rmPath + " doesn't exist");
+                                    }
+                                }
+                            }
+                        }
                     }
                     else
                     {
-                        error("File or Directory does not exist / isn't valid");
+                        error("no path specified");
                     }
                     break;
 
@@ -213,11 +264,48 @@ namespace GOS
                     Console.WriteLine(echoMsg);
                     break;
 
-                case "run":
-                    var targetApplication = input.Remove(0, input.IndexOf(' ') + 1);
-                    switch (targetApplication)
+                case "info":
+                    Console.ForegroundColor = themeColor1;
+                    Console.WriteLine("gOS");
+                    Console.WriteLine("Version: " + version);
+                    Console.WriteLine("System Ram: " + Cosmos.Core.CPU.GetAmountOfRAM().ToString());
+                    Console.WriteLine("Root Drive size: " + Sys.FileSystem.VFS.VFSManager.GetTotalSize("0") + " bytes");
+                    Console.WriteLine("Root Drive Free Space: " + Sys.FileSystem.VFS.VFSManager.GetTotalFreeSpace("0") + " bytes");
+                    break;
+
+                case "help":
+                    if (input.Contains(" "))
                     {
-                        
+                        if (input.EndsWith(" "))
+                        {
+                            error("no page specified. select a page 1-3");
+                        }
+                        else
+                        {
+                            var helpPage = input.Split(" ")[1];
+                            switch (helpPage)
+                            {
+                                case "1":
+                                    Console.WriteLine("Power Commands:\nshutdown: Turns the OS and computer off.\nreboot: Reboots the computer.\nConsole Commands:\nreinit: Reinitializes the OS (pseudo-reboot).\nclear: Clears the console.\necho (message): Prints the specified message to the console.\ntheme (themeID): Changes the theme of the console.");
+                                    break;
+
+                                case "2":
+                                    Console.WriteLine("Filesystem Commands:\nls: Shows all subdirectories and files within current directory.\ncd (path): Changes current directory to specified path.\nrm (path): Removes specified directory or file.\nmkdir (path): Creates new directory in specified path.\ntouch (path): Creates new file in specified path.\ncat (path): Prints all the lines of specified file.\ngrep (pattern) (path): type grep -h for more information.");
+                                    break;
+
+                                case "3":
+                                    Console.WriteLine("WIP filesystem commands:\nwrite (path) (text): Writes to specified text to specified file.\nwriteline (path) (text): Creates new line and writes specified text to a file.\nOther Commands:\nbeep (frequency): Plays a sound with the specified frequency throught the pc speakers");
+                                    break;
+
+                                default:
+                                    error(helpPage + " isnt a help page, select a page 1-3");
+                                    break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        error("no page specified. select a page 1-3");
                     }
                     break;
 
