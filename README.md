@@ -1,5 +1,6 @@
-# gOS
-is an operating system written in c# with the Cosmos OS Kit
+![alt text](https://i.imgur.com/wK6dPGM.png)
+---
+gOS is an operating system written in c# with the Cosmos OS Kit
 ![alt text](https://i.gyazo.com/f5ba2fb9203a0426d042ba49e4821f12.png)
 
 ## Commands
