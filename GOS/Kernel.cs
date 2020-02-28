@@ -1,12 +1,16 @@
 ﻿using System;
 using Sys = Cosmos.System;
 using System.IO;
-using System.Collections.Generic;
+using Cosmos.System.Graphics;
+using System.Drawing;
 
 namespace GOS
 {
     public class Kernel : Sys.Kernel
     {
+
+        Canvas canvas;
+
         public ConsoleColor themeColor1;
         public ConsoleColor themeColor2;
         public ConsoleColor themeColor3;
@@ -37,12 +41,25 @@ namespace GOS
             currentTheme = x;
 
             OSinit();
+
+            canvas = FullScreenCanvas.GetFullScreenCanvas();
+
+            //canvas.Clear(Color.White);
+            Sys.MouseManager.ScreenWidth = (uint)canvas.Mode.Columns;
+            Sys.MouseManager.ScreenHeight = (uint)canvas.Mode.Rows;
         }
 
         protected override void Run()
         {
             inputText();
-            Command.AcceptCmd();
+            //Command.AcceptCmd();
+            Pen pen = new Pen(Color.DimGray);
+            canvas.DrawFilledRectangle(pen, 450, 450, 80, 60);
+            //uint X = Sys.MouseManager.X;
+            //uint Y = Sys.MouseManager.Y;
+            canvas.DrawLine(pen, X, Y, X + 5, Y);
+            canvas.DrawLine(pen, X, Y, X, Y - 5);
+            canvas.DrawLine(pen, X, Y, X + 5, Y - 5);
         }
 
         protected void inputText()
