@@ -1699,11 +1699,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\gOS\\GOS\\GOS.csproj",
+      "projectUniqueName": "C:\\Users\\gabri\\Documents\\GitHub\\gOS\\GOS\\GOS.csproj",
       "projectName": "GOS",
-      "projectPath": "D:\\gOS\\GOS\\GOS.csproj",
+      "projectPath": "C:\\Users\\gabri\\Documents\\GitHub\\gOS\\GOS\\GOS.csproj",
       "packagesPath": "C:\\Users\\gabri\\.nuget\\packages\\",
-      "outputPath": "D:\\gOS\\GOS\\obj\\",
+      "outputPath": "C:\\Users\\gabri\\Documents\\GitHub\\gOS\\GOS\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gabri\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1769,7 +1769,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "D:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {
