@@ -9,7 +9,7 @@ namespace GOS
     public class Kernel : Sys.Kernel
     {
 
-        Canvas canvas;
+        //public Canvas canvas;
 
         public ConsoleColor themeColor1;
         public ConsoleColor themeColor2;
@@ -42,24 +42,18 @@ namespace GOS
 
             OSinit();
 
-            canvas = FullScreenCanvas.GetFullScreenCanvas();
-
+            //canvas = FullScreenCanvas.GetFullScreenCanvas();
             //canvas.Clear(Color.White);
-            Sys.MouseManager.ScreenWidth = (uint)canvas.Mode.Columns;
-            Sys.MouseManager.ScreenHeight = (uint)canvas.Mode.Rows;
+
+            Sprites spr = new Sprites();
+            spr.canvasSetup();
         }
 
         protected override void Run()
         {
-            inputText();
-            //Command.AcceptCmd();
-            Pen pen = new Pen(Color.DimGray);
-            canvas.DrawFilledRectangle(pen, 450, 450, 80, 60);
-            //uint X = Sys.MouseManager.X;
-            //uint Y = Sys.MouseManager.Y;
-            canvas.DrawLine(pen, X, Y, X + 5, Y);
-            canvas.DrawLine(pen, X, Y, X, Y - 5);
-            canvas.DrawLine(pen, X, Y, X + 5, Y - 5);
+            Sprites spr = new Sprites();
+            spr.DrawSprite();
+            //canvas.DrawFilledRectangle(pen, 0, 713, 1367, 55);
         }
 
         protected void inputText()
@@ -112,6 +106,11 @@ namespace GOS
             string[] arrLine = File.ReadAllLines(fileName);
             arrLine[line_to_edit - 1] = newText;
             File.WriteAllLines(fileName, arrLine);
+        }
+
+        public void drawPix (Pen drawpen, int y, int x)
+        {
+            //canvas.DrawPoint(drawpen, y, x);
         }
     }
 }
